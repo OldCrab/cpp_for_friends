@@ -17,58 +17,69 @@ int getRandomNumber(int min, int max) {
     return min + getPositiveRandomNumber(-min + max);
 }
 
-int* createRandomizedArray(int dimension) {
-    int *array = new int[dimension];
-    for (int i = 0; i < dimension; i++) {
+int* createRandomizedArray(int size) {
+    int *array = new int[size];
+    for (int i = 0; i < size; i++) {
         array[i] = getRandomNumber(-100, 100);
     }
     return array;
 }
 
-void fillArrayByZeros(int* fillable, int* filling, int &fillableDimension, int fillingDimension) {
-    for (int i = 0; i < fillingDimension; i++) {
+void fillArrayByZeros(int* fillable, int* filling, int &fillableSize, int fillingSize) {
+    for (int i = 0; i < fillingSize; i++) {
         if (filling[i] == 0) {
-            fillable[fillableDimension++] = 0;
+            fillable[fillableSize++] = 0;
         }
     }
 }
 
-void fillArrayByNegativeValues(int* fillable, int* filling, int &fillableDimension, int fillingDimension) {
-    for (int i = 0; i < fillingDimension; i++) {
+void fillArrayByNegativeValues(int* fillable, int* filling, int &fillableSize, int fillingSize) {
+    for (int i = 0; i < fillingSize; i++) {
         if (filling[i] < 0) {
-            fillable[fillableDimension++] = filling[i];
+            fillable[fillableSize++] = filling[i];
         }
     }
 }
 
-void outputArray(int* array, int dimension) {
-    for (int i = 0; i < dimension; i++) {
+void outputArray(int* array, int size) {
+    for (int i = 0; i < size; i++) {
         cout << array[i] << " ";
     }
     cout << endl;
 }
 
+void release(int* array) {
+    delete []array;
+}
+
 int main(int argc, const char * argv[]) {
-    int arrayDimension1, arrayDimension2, arrayDimension3 = 0, arrayDimension4 = 0;
-    arrayDimension1 = getPositiveRandomNumber(500);
+    int arraySize1, arraySize2, arraySize3 = 0, arraySize4 = 0;
+    arraySize1 = getPositiveRandomNumber(500);
     do {
-        arrayDimension2 = getPositiveRandomNumber(500);
-    } while (arrayDimension1 == arrayDimension2);
+        arraySize2 = getPositiveRandomNumber(500);
+    } while (arraySize1 == arraySize2);
     
-    int *array1 = createRandomizedArray(arrayDimension1);
-    int *array2 = createRandomizedArray(arrayDimension2);
+    int *array1 = createRandomizedArray(arraySize1);
+    int *array2 = createRandomizedArray(arraySize2);
     int *array3 = new int[2];
     int *array4 = new int[2];
 
-    fillArrayByZeros(array3, array1, arrayDimension3, arrayDimension1);
-    fillArrayByZeros(array3, array2, arrayDimension3, arrayDimension2);
+    fillArrayByZeros(array3, array1, arraySize3, arraySize1);
+    fillArrayByZeros(array3, array2, arraySize3, arraySize2);
     
-    fillArrayByNegativeValues(array4, array1, arrayDimension4, arrayDimension1);
-    fillArrayByNegativeValues(array4, array2, arrayDimension4, arrayDimension2);
+    fillArrayByNegativeValues(array4, array1, arraySize4, arraySize1);
+    fillArrayByNegativeValues(array4, array2, arraySize4, arraySize2);
 
-//    outputArray(array1, arrayDimension1);
-//    outputArray(array2, arrayDimension2);
-//    outputArray(array3, arrayDimension3);
-//    outputArray(array4, arrayDimension4);
+    //    outputArray(array1, arrayDimension1);
+    //    outputArray(array2, arrayDimension2);
+    //    outputArray(array3, arrayDimension3);
+    //    outputArray(array4, arrayDimension4);
+    
+    //освобождаем память от массивов
+    release(array1);
+    release(array2);
+    release(array3);
+    release(array4);
+
     return 0;
 }
