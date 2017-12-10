@@ -41,7 +41,7 @@ map<char,int> createLettersMap(string str, int &lettersCount) {
     return map;
 }
 
-bool hasMoreThenOneOdd(map<char,int> lettersMap) {
+bool hasMoreThenOneOdd(map<char,int> &lettersMap) {
     bool hasOdd = false;
     
     for (auto iterator = lettersMap.begin(); iterator != lettersMap.end(); ++iterator) {
@@ -53,10 +53,11 @@ bool hasMoreThenOneOdd(map<char,int> lettersMap) {
             }
         }
     }
+    
     return false;
 }
 
-string composePalindrome(map<char,int> lettersMap, int lettersCount) {
+string composePalindrome(map<char,int> &lettersMap, int lettersCount) {
     char* result = new char[lettersCount];
     
     int i = 0;
